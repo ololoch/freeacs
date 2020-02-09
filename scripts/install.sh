@@ -22,7 +22,8 @@ install_basic() {
   apt-get -y update && apt-get -y upgrade
   apt-get -y install unzip zip curl wget jq gawk
   apt-get -y install mariadb-server-10.3
-  apt-get -y install openjdk-11-jre-headless
+  apt-get -y install openjdk-11-jre-headless &&
+  mysql_secure_installation
 }
 
 # Checks to see if installation is ok
