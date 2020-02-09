@@ -7,7 +7,7 @@
 
 check_ubuntu_version() {
     currentver=`lsb_release -r | awk '{ print $2 }'`
-    requiredver='16.04'
+    requiredver='10'
     if [ "$(printf '%s\n' "$requiredver" "$currentver" | sort -V | head -n1)" = "$requiredver" ];
     then
         echo "Ubuntu version >= 16.04 OK "
@@ -21,8 +21,8 @@ check_ubuntu_version() {
 install_basic() {
   apt-get -y update && apt-get -y upgrade
   apt-get -y install unzip zip curl wget jq gawk
-  apt-get -y install mysql-server-5.7
-  apt-get -y install openjdk-8-jre-headless
+  apt-get -y install mariadb-server-10.3
+  apt-get -y install openjdk-11-jre-headless
 }
 
 # Checks to see if installation is ok
@@ -43,7 +43,7 @@ check_java_installation() {
 }
 
 check_mysql_installation() {
-  mysqlok=`mysql --version | grep 5.7 | wc -l`
+  mysqlok=`mysql --version | grep 10.3 | wc -l`
   if [ $mysqlok != '1' ] ; then
     echo "The command 'mysql --version' doesn't seem to return the expected '5.7' string."
 	echo "One explanation is that you've installed the wrong version of MySQL. Please"
@@ -323,3 +323,4 @@ echo "described in the 'Fusion Installation.pdf' document, chapter 4 (the"
 echo "document should be present in this folder)"
 echo ""
 echo "If this is an update, no need to do anything else"
+
